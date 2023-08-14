@@ -15,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/insert', function () {
-    DB::insert('insert into posts (title, description, content)values(?, ?, ?)', ['Laravel Raw Query', 'Laravel Veri Tabanı', 'Laravel Veri Tabanı Dersleri']);
+    DB::insert('insert into posts (title, description, content)values(?, ?, ?)', ['Başlık', 'Açıklama', 'İçerik']);
     return "Veri Eklendi";
 });
+
+Route::get('/select', function(){
+    $posts = DB::select('select * from posts where id = ?', [1]);
+
+    foreach( $posts as $post){
+       return $post->title;
+    }
+});
+
+Route::get('/update', function(){
+     $update = DB::update('UPDATE posts SET title = "yeni başlık1", description = "yeni açıklama1", content = "yeni içerik1" WHERE id = ?', [3]);   
+     return $update;
+});
+ 
